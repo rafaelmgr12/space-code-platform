@@ -1,0 +1,56 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model Pilot {
+  id String @id @default(uuid())
+
+  pilot_certification String
+  name                String
+  age                 Int
+  credits             Float
+  location_planet     String
+
+
+
+  @@map("pilots")
+}
+
+model Ship {
+  id String @id @default(uuid())
+
+  fuel_capacity   Float
+  fuel_level      Float
+  weight_capacity Float
+
+  @@map("ships")
+}
+
+model Contracts {
+  id String @id @default(uuid())
+
+  description        String
+  payload            String
+  origin_planet      String
+  destination_planet String
+  value              Float
+
+
+  @@map("contracts")
+}
+model Resource{
+  id String @id @default(uuid())
+
+  name String
+  weight Float
+  @@map("resources")
+}
