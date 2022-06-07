@@ -1,11 +1,11 @@
 import { Router } from "express";
 
-import { CreatePilotController } from "./modules/client/createPilot/CreatePilotController";
+import { CreatePilotAndShipController } from "./modules/client/useCase/CreatePilotAndShipController";
 
 const routes = Router();
 
-const createPilotController = new CreatePilotController();
+const createPilotAndShipController = new CreatePilotAndShipController();
 
-routes.post("/pilot/", createPilotController.handle);
+routes.post("/pilot/", createPilotAndShipController.handle);
 
 export { routes };

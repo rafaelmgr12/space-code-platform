@@ -20,7 +20,10 @@ model Pilot {
   credits             Float
   location_planet     String
 
+  ship    Ship   @relation(fields: [ship_id], references: [id])
+  ship_id String
 
+  contracts Contracts[]
 
   @@map("pilots")
 }
@@ -31,6 +34,9 @@ model Ship {
   fuel_capacity   Float
   fuel_level      Float
   weight_capacity Float
+
+  pilot_id Pilot[]
+
 
   @@map("ships")
 }
@@ -44,13 +50,25 @@ model Contracts {
   destination_planet String
   value              Float
 
+  resource_id String
+  resource    Resource @relation(fields: [resource_id], references: [id])
+
+
+  pilot_id String
+  pilot    Pilot   @relation(fields: [pilot_id], references: [id])
 
   @@map("contracts")
 }
-model Resource{
+
+model Resource {
   id String @id @default(uuid())
 
-  name String
+  name   String
   weight Float
+
+  contract_id Contracts[]
+
+
+
   @@map("resources")
 }
