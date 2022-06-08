@@ -14,16 +14,16 @@ datasource db {
 model Pilot {
   id String @id @default(uuid())
 
-  pilot_certification String
+  pilot_certification String @unique
   name                String
   age                 Int
   credits             Float
   location_planet     String
 
-  ship    Ship   @relation(fields: [ship_id], references: [id])
-  ship_id String
-
-  contracts Contracts[]
+  ship       Ship?        @relation(fields: [ship_id], references: [id])
+  ship_id    String?
+  created_at DateTime    @default(now())
+  contracts  Contracts[]
 
   @@map("pilots")
 }
@@ -35,8 +35,8 @@ model Ship {
   fuel_level      Float
   weight_capacity Float
 
-  pilot_id Pilot[]
-
+  Pilot   Pilot[]
+  created_at DateTime @default(now())
 
   @@map("ships")
 }
@@ -49,14 +49,16 @@ model Contracts {
   origin_planet      String
   destination_planet String
   value              Float
+  created_at DateTime @default(now())
+
 
   resource_id String
   resource    Resource @relation(fields: [resource_id], references: [id])
 
-
-  pilot_id String
-  pilot    Pilot   @relation(fields: [pilot_id], references: [id])
-
+  
+  pilot_id   String
+  pilot      Pilot    @relation(fields: [pilot_id], references: [id])
+  
   @@map("contracts")
 }
 
@@ -68,7 +70,7 @@ model Resource {
 
   contract_id Contracts[]
 
-
+  created_at DateTime @default(now())
 
   @@map("resources")
 }

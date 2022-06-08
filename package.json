@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "ts-node-dev --exit-child --transpile-only --ignore-watch node_modules src/server.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "NODE_ENV=test jest --runInBand --detectOpenHandles"
   },
   "repository": {
     "type": "git",
@@ -22,11 +22,15 @@
     "@prisma/client": "^3.15.0",
     "express": "^4.18.1",
     "express-async-errors": "^3.1.1",
-    "prisma": "^3.15.0"
+    "jest-mock-extended": "^2.0.6",
+    "prisma": "^3.15.0",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "@types/express": "^4.17.13",
+    "@types/jest": "^28.1.1",
     "@types/node": "^17.0.23",
+    "@types/uuid": "^8.3.4",
     "@typescript-eslint/eslint-plugin": "^5.18.0",
     "@typescript-eslint/parser": "^5.18.0",
     "eslint": "^8.12.0",
@@ -36,7 +40,9 @@
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-import-helpers": "^1.2.1",
     "eslint-plugin-prettier": "^4.0.0",
+    "jest": "^28.1.1",
     "prettier": "^2.6.2",
+    "ts-jest": "^28.0.4",
     "ts-node-dev": "^1.1.8",
     "typescript": "^4.6.3"
   }

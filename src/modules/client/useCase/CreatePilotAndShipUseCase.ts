@@ -19,6 +19,7 @@ export class CreatePilotAndShipUseCase {
     age,
     credits,
     location_planet,
+    ship_id,
     fuel_capacity,
     fuel_level,
     weight_capacity,
@@ -35,6 +36,7 @@ export class CreatePilotAndShipUseCase {
         age,
         credits,
         location_planet,
+        ship_id,
         ship: {
           create: {
             fuel_capacity,
