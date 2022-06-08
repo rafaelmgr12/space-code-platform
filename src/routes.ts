@@ -1,6 +1,6 @@
 import { Router } from "express";
 
-import { CreatePilotAndShipController } from "./modules/client/useCase/CreatePilotAndShipController";
+import { CreatePilotAndShipController } from "./modules/pilot/useCase/createPilotaAndShip/CreatePilotAndShipController";
 
 const routes = Router();
 
