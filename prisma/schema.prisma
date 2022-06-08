@@ -3,7 +3,6 @@
 
 generator client {
   provider = "prisma-client-js"
-
 }
 
 datasource db {
@@ -14,16 +13,15 @@ datasource db {
 model Pilot {
   id String @id @default(uuid())
 
-  pilot_certification String @unique
+  pilot_certification String 
   name                String
   age                 Int
   credits             Float
   location_planet     String
 
-  ship       Ship?        @relation(fields: [ship_id], references: [id])
-  ship_id    String?
+  Ship Ship?
+  
   created_at DateTime    @default(now())
-  contracts  Contracts[]
 
   @@map("pilots")
 }
@@ -35,7 +33,8 @@ model Ship {
   fuel_level      Float
   weight_capacity Float
 
-  Pilot   Pilot[]
+  pilot       Pilot        @relation(fields: [pilot_id], references: [id],onDelete: Cascade,onUpdate: Cascade)
+  pilot_id    String
   created_at DateTime @default(now())
 
   @@map("ships")
@@ -56,9 +55,7 @@ model Contracts {
   resource    Resource @relation(fields: [resource_id], references: [id])
 
   
-  pilot_id   String
-  pilot      Pilot    @relation(fields: [pilot_id], references: [id])
-  
+ 
   @@map("contracts")
 }
 

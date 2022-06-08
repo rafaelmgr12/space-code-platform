@@ -1,7 +1,9 @@
 import express, { NextFunction, Request, Response } from "express";
-
-import { routes } from "./routes";
+import "reflect-metadata";
 import "express-async-errors";
+
+import { AppError } from "./errors/AppError";
+import { routes } from "./routes";
 
 const app = express();
 
@@ -11,18 +13,13 @@ app.use(routes);
 
 app.use(
   (err: Error, request: Request, response: Response, next: NextFunction) => {
-    if (err instanceof Error) {
-      response.status(400).json({
-        message: err.message,
-      });
-      next(err);
+    if (err instanceof AppError) {
+      return response.status(err.statusCode).json({ message: err.message });
     }
-
-    response.status(500).json({
+    return response.status(500).json({
       status: "error",
-      message: "Internal server error",
+      message: `Internal server error-${err.message}`,
     });
-    next(err);
   }
 );
 
