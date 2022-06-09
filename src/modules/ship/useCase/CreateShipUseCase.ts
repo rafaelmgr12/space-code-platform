@@ -15,7 +15,7 @@ export class CreateShipUseCase {
     weight_capacity,
     pilot_certification,
   }: IShip) {
-    const pilot_id = await prisma.pilot.findFirst({
+    const pilot_id = await prisma.pilot.findUnique({
       where: {
         pilot_certification,
       },
