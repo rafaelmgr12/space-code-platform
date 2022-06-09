@@ -6,7 +6,6 @@ interface IShip {
   fuel_level: number;
   weight_capacity: number;
   pilot_certification: string;
-  name: string;
 }
 
 export class CreateShipUseCase {
@@ -15,12 +14,10 @@ export class CreateShipUseCase {
     fuel_level,
     weight_capacity,
     pilot_certification,
-    name,
   }: IShip) {
     const pilot_id = await prisma.pilot.findFirst({
       where: {
         pilot_certification,
-        name,
       },
     });
     if (!pilot_id) {

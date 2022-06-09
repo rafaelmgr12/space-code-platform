@@ -18,10 +18,17 @@ export class CreatePilotUseCase {
     location_planet,
   }: ICreateClientAndShip) {
     const minimumAge = 18; // minimum age for a pilot to fly
+    const pilot_id = await prisma.pilot.findFirst({
+      where: {
+        pilot_certification,
+      },
+    });
     if (age < minimumAge) {
       throw new AppError("age must be greater than 18");
     }
-
+    if (pilot_id) {
+      throw new AppError("pilot already exists");
+    }
     const pilot = await prisma.pilot.create({
       data: {
         pilot_certification,
