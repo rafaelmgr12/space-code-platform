@@ -1,23 +1,20 @@
 import { prisma } from "../src/database/prismaClient";
 import { AppError } from "../src/errors/AppError";
-import { CreatePilotAndShipUseCase } from "../src/modules/pilot/useCase/createPilotaAndShip/CreatePilotAndShipUseCase";
+import { CreatePilotUseCase } from "../src/modules/pilot/useCase/createPilotaAndShip/CreatePilotUseCase";
 
-let createPilotAndShipUseCase: CreatePilotAndShipUseCase;
+let createPilotUseCase: CreatePilotUseCase;
 
 describe("Create Pilot and Ship", () => {
   beforeEach(() => {
-    createPilotAndShipUseCase = new CreatePilotAndShipUseCase();
+    createPilotUseCase = new CreatePilotUseCase();
   });
   it("Should be able to create a new Pilot and Ship", async () => {
-    const result = await createPilotAndShipUseCase.execute({
+    const result = await createPilotUseCase.execute({
       pilot_certification: "111111",
       name: "Matheus",
       age: 19,
       credits: 1421412,
       location_planet: "calahas",
-      fuel_capacity: 100,
-      fuel_level: 100,
-      weight_capacity: 100,
     });
 
     expect(result).toHaveProperty("id");
@@ -30,15 +27,12 @@ describe("Create Pilot and Ship", () => {
   });
   it("Should not be able to create a new Pilot and Ship", async () => {
     expect(async () => {
-      await createPilotAndShipUseCase.execute({
+      await createPilotUseCase.execute({
         pilot_certification: "111111",
         name: "Matheus",
         age: 16,
         credits: 1421412,
         location_planet: "calahas",
-        fuel_capacity: 100,
-        fuel_level: 100,
-        weight_capacity: 100,
       });
     }).rejects.toBeInstanceOf(AppError);
   });

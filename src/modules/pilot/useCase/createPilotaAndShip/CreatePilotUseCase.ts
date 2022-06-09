@@ -9,7 +9,7 @@ interface ICreateClientAndShip {
   location_planet: string;
 }
 
-export class CreatePilotAndShipUseCase {
+export class CreatePilotUseCase {
   async execute({
     pilot_certification,
     name,
