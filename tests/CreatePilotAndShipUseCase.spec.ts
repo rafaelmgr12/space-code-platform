@@ -8,9 +8,9 @@ describe("Create Pilot and Ship", () => {
   beforeEach(() => {
     createPilotUseCase = new CreatePilotUseCase();
   });
-  it("Should be able to create a new Pilot and Ship", async () => {
+  it("Should be able to create a new Pilot", async () => {
     const result = await createPilotUseCase.execute({
-      pilot_certification: "111111",
+      pilot_certification: "123",
       name: "Matheus",
       age: 19,
       credits: 1421412,
@@ -25,10 +25,29 @@ describe("Create Pilot and Ship", () => {
       },
     });
   });
-  it("Should not be able to create a new Pilot and Ship", async () => {
+  it("Should not be able to create a new Pilot", async () => {
     expect(async () => {
       await createPilotUseCase.execute({
-        pilot_certification: "111111",
+        pilot_certification: "123",
+        name: "Matheus",
+        age: 16,
+        credits: 1421412,
+        location_planet: "calahas",
+      });
+    }).rejects.toBeInstanceOf(AppError);
+  });
+  it("Should not be able to create a Pilot that already exist", async () => {
+    expect(async () => {
+      await createPilotUseCase.execute({
+        pilot_certification: "321",
+        name: "Matheus",
+        age: 16,
+        credits: 1421412,
+        location_planet: "calahas",
+      });
+
+      await createPilotUseCase.execute({
+        pilot_certification: "321",
         name: "Matheus",
         age: 16,
         credits: 1421412,
