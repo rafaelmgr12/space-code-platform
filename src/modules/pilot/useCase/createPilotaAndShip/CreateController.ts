@@ -1,19 +1,11 @@
 import { Request, Response } from "express";
 
-import { CreatePilotAndShipUseCase } from "./CreatePilotAndShipUseCase";
+import { CreatePilotAndShipUseCase } from "./CreatePilotUseCase";
 
 export class CreatePilotAndShipController {
   async handle(request: Request, response: Response) {
-    const {
-      pilot_certification,
-      name,
-      age,
-      credits,
-      location_planet,
-      fuel_capacity,
-      fuel_level,
-      weight_capacity,
-    } = request.body;
+    const { pilot_certification, name, age, credits, location_planet } =
+      request.body;
 
     const createPilotUseCase = new CreatePilotAndShipUseCase();
     const result = await createPilotUseCase.execute({
@@ -22,9 +14,6 @@ export class CreatePilotAndShipController {
       age,
       credits,
       location_planet,
-      fuel_capacity,
-      fuel_level,
-      weight_capacity,
     });
     return response.json(result);
   }

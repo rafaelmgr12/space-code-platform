@@ -1,7 +1,7 @@
 import { Router } from "express";
 
 import { PublishContractController } from "./modules/contracts/useCase/publishContract/PublishContractController";
-import { CreatePilotAndShipController } from "./modules/pilot/useCase/createPilotaAndShip/CreatePilotAndShipController";
+import { CreatePilotAndShipController } from "./modules/pilot/useCase/createPilotaAndShip/CreateController";
 
 const routes = Router();
 

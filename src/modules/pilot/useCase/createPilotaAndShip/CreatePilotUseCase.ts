@@ -7,9 +7,6 @@ interface ICreateClientAndShip {
   age: number;
   credits: number;
   location_planet: string;
-  fuel_capacity: number;
-  fuel_level: number;
-  weight_capacity: number;
 }
 
 export class CreatePilotAndShipUseCase {
@@ -19,9 +16,6 @@ export class CreatePilotAndShipUseCase {
     age,
     credits,
     location_planet,
-    fuel_capacity,
-    fuel_level,
-    weight_capacity,
   }: ICreateClientAndShip) {
     const minimumAge = 18; // minimum age for a pilot to fly
     if (age < minimumAge) {
@@ -35,9 +29,6 @@ export class CreatePilotAndShipUseCase {
         age,
         credits,
         location_planet,
-        Ship: {
-          create: { fuel_capacity, fuel_level, weight_capacity },
-        },
       },
     });
     return pilot;
