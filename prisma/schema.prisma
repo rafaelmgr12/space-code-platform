@@ -13,13 +13,13 @@ datasource db {
 model Pilot {
   id String @id @default(uuid())
 
-  pilot_certification String
+  pilot_certification String @unique
   name                String
   age                 Int
   credits             Float
   location_planet     String
 
-  Ship Ship?
+  Ship Ship[]
   Contratcs Contracts[]
   created_at DateTime @default(now())
 
@@ -33,8 +33,8 @@ model Ship {
   fuel_level      Float
   weight_capacity Float
 
-  pilot      Pilot    @relation(fields: [pilot_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  pilot_id   String
+  pilot      Pilot?    @relation(fields: [pilot_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  pilot_id   String?
   created_at DateTime @default(now())
 
   @@map("ships")
