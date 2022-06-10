@@ -1,15 +1,11 @@
 import { prisma } from "../../../../database/prismaClient";
 import { AppError } from "../../../../errors/AppError";
-import { ICreatePilot } from "../../useCase/createPilotaAndShip/CreatePilotUseCase";
 import { CreateTravelTable } from "../CreateTravelTable";
 
 interface ITravel {
   origin_planet: string;
   destination_planet: string;
   pilot_certification: string;
-}
-interface ITravelPilot extends ICreatePilot {
-  id: string;
 }
 
 export class TravelPlanetsUseCase {
@@ -18,7 +14,7 @@ export class TravelPlanetsUseCase {
     destination_planet,
     pilot_certification,
   }: ITravel) {
-    const pilot: ITravelPilot = await prisma.pilot.findUnique({
+    const pilot = await prisma.pilot.findUnique({
       where: { pilot_certification },
     });
     if (!pilot) {
