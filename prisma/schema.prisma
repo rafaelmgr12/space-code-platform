@@ -19,7 +19,7 @@ model Pilot {
   credits             Float
   location_planet     String
 
-  Ship Ship[]
+  Ship Ship?
   Contratcs Contracts[]
   created_at DateTime @default(now())
 
@@ -74,4 +74,17 @@ model Resource {
   created_at DateTime @default(now())
 
   @@map("resources")
+}
+
+model Travel{
+  id Int @id @default(autoincrement())
+
+  origin_planet String
+  destination_planet String
+ 
+  fuel_consumption Float
+
+  route Boolean
+
+  @@map("travels")
 }
