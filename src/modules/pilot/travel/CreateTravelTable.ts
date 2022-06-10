@@ -31,7 +31,9 @@ export class CreateTravelTable {
       fuel_consumption: Travel.fuel_consumption[i],
       route: Travel.route[i],
     }));
+    // eslint-disable-next-line no-plusplus
     for (let i = 0; i < final.length; i++) {
+      // eslint-disable-next-line no-await-in-loop
       await prisma.travel.create({
         data: final[i],
       });
