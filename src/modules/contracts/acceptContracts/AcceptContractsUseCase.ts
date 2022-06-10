@@ -28,6 +28,29 @@ export class AccecptContractsUseCase {
       throw new AppError("contract not found");
     }
 
+    const ship = await prisma.ship.findUnique({
+      where: {
+        pilot_id: pilot.id,
+      },
+    });
+    if (!ship) {
+      throw new AppError("ship not found");
+    }
+
+    const routes = await prisma.travel.findFirst({
+      where: {
+        origin_planet: contracExist.origin_planet,
+        destination_planet: contracExist.destination_planet,
+      },
+    });
+    if (!routes) {
+      throw new AppError("route not found");
+    }
+
+    if (ship.fuel_level <= routes.fuel_consumption || routes.route === false) {
+      throw new AppError("The travel is possible");
+    }
+
     const acceptedContract = await prisma.contracts.findUnique({
       where: {
         id,
