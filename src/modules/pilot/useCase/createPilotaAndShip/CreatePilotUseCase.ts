@@ -1,7 +1,7 @@
 import { prisma } from "../../../../database/prismaClient";
 import { AppError } from "../../../../errors/AppError";
 
-export interface ICreateClient {
+export interface ICreatePilot {
   pilot_certification: string;
   name: string;
   age: number;
@@ -16,7 +16,7 @@ export class CreatePilotUseCase {
     age,
     credits,
     location_planet,
-  }: ICreateClient) {
+  }: ICreatePilot) {
     const minimumAge = 18; // minimum age for a pilot to fly
     const pilot_id = await prisma.pilot.findFirst({
       where: {
