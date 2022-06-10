@@ -1,4 +1,5 @@
 import { prisma } from "../../../../database/prismaClient";
+import { AppError } from "../../../../errors/AppError";
 
 interface IContract {
   description: string;
@@ -18,6 +19,20 @@ export class PublishContractUseCase {
     value,
     weight,
   }: IContract) {
+    const routes = await prisma.travel.findFirst({
+      where: {
+        origin_planet,
+        destination_planet,
+      },
+    });
+    if (!routes) {
+      throw new AppError("Routes not found");
+    }
+
+    if (routes.route === false) {
+      throw new AppError("This Route are not possible");
+    }
+
     const resourceName = payload.split(",");
     const resourceWeight = weight.split(",");
 
