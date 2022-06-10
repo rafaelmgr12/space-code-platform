@@ -1,6 +1,6 @@
 import { prisma } from "../../../../database/prismaClient";
 import { AppError } from "../../../../errors/AppError";
-import { ICreateClient } from "../../useCase/createPilotaAndShip/CreatePilotUseCase";
+import { ICreatePilot } from "../../useCase/createPilotaAndShip/CreatePilotUseCase";
 import { CreateTravelTable } from "../CreateTravelTable";
 
 interface ITravel {
@@ -8,7 +8,7 @@ interface ITravel {
   destination_planet: string;
   pilot_certification: string;
 }
-interface ITravelPilot extends ICreateClient {
+interface ITravelPilot extends ICreatePilot {
   id: string;
 }
 
