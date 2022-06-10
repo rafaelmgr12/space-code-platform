@@ -48,7 +48,7 @@ export class AccecptContractsUseCase {
     }
 
     if (ship.fuel_level <= routes.fuel_consumption || routes.route === false) {
-      throw new AppError("The travel is possible");
+      throw new AppError("The travel is not possible");
     }
 
     const acceptedContract = await prisma.contracts.findUnique({
