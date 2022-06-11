@@ -88,3 +88,12 @@ model Travel{
 
   @@map("travels")
 }
+
+model Trasaction{
+  id String @id @default(uuid())
+
+  description String
+  created_at DateTime @default(now())
+
+  @@map("transactions")
+}

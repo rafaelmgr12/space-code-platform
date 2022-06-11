@@ -63,6 +63,12 @@ export class FinishTranportContractUseCase {
       },
     });
 
+    await prisma.trasaction.create({
+      data: {
+        description: `Contract ${contract.id} ${contract.description} paid: ${contract.value}`,
+      },
+    });
+
     const pilotBalance = pilot.credits + contract.value;
     await prisma.pilot.update({
       where: {

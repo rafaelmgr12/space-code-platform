@@ -3,10 +3,11 @@ import { AppError } from "../../../../errors/AppError";
 
 interface IRefil {
   pilot_certification: string;
+  quantity: number;
 }
 
 export class RefilFuelUseCase {
-  async execute({ pilot_certification }: IRefil) {
+  async execute({ pilot_certification, quantity }: IRefil) {
     const pilot = await prisma.pilot.findUnique({
       where: {
         pilot_certification,
@@ -27,9 +28,12 @@ export class RefilFuelUseCase {
     if (ship.fuel_capacity === ship.fuel_level) {
       throw new AppError("ship is full");
     }
+    if (quantity > ship.fuel_capacity) {
+      throw new AppError("quantity is greater than capacity");
+    }
 
-    const refilPrice = 7; // cost to refil fuel
-    if (pilot.credits < refilPrice) {
+    const unitFuel = 7; // cost to refil fuel
+    if (pilot.credits < unitFuel * quantity) {
       throw new AppError("Not enough credits");
     }
     await prisma.pilot.update({
@@ -37,7 +41,13 @@ export class RefilFuelUseCase {
         id: pilot.id,
       },
       data: {
-        credits: pilot.credits - refilPrice,
+        credits: pilot.credits - unitFuel * quantity,
+      },
+    });
+
+    await prisma.trasaction.create({
+      data: {
+        description: `${pilot.name} bought fuel: +${unitFuel * quantity}`,
       },
     });
 
