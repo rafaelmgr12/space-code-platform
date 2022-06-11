@@ -1,6 +1,6 @@
 import { prisma } from "../src/database/prismaClient";
 import { AppError } from "../src/errors/AppError";
-import { CreatePilotUseCase } from "../src/modules/pilot/useCase/createPilotaAndShip/CreatePilotUseCase";
+import { CreatePilotUseCase } from "../src/modules/pilot/useCase/createPilot/CreatePilotUseCase";
 
 let createPilotUseCase: CreatePilotUseCase;
 
