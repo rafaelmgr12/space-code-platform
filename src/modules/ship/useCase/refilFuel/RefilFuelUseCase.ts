@@ -47,7 +47,7 @@ export class RefilFuelUseCase {
 
     await prisma.trasaction.create({
       data: {
-        description: `${pilot.name} bought fuel: +${unitFuel * quantity}`,
+        description: `${pilot.name} bought fuel: +₭${unitFuel * quantity}`,
       },
     });
 

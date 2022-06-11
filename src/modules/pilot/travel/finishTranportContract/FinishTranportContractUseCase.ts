@@ -65,7 +65,7 @@ export class FinishTranportContractUseCase {
 
     await prisma.trasaction.create({
       data: {
-        description: `Contract ${contract.id} ${contract.description} paid: ${contract.value}`,
+        description: `Contract ${contract.id} ${contract.description} paid: -₭${contract.value}`,
       },
     });
 
