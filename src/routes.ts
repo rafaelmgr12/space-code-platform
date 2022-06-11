@@ -8,19 +8,24 @@ import { TravelPlanetsController } from "./modules/pilot/travel/useCase/TravelPl
 import { CreatePilotController } from "./modules/pilot/useCase/createPilot/CreatePilotController";
 import { CreateShipController } from "./modules/ship/useCase/createShip/CreateShipController";
 import { RefilFuelController } from "./modules/ship/useCase/refilFuel/RefilFuelController";
+import { TransactionTableController } from "./modules/summary/useCase/transactionTable/TransactionTableController";
 
 const routes = Router();
 
+// post
 const createPilotController = new CreatePilotController();
 const createShipController = new CreateShipController();
 const publishContractController = new PublishContractController();
 
-const travelPlanetsController = new TravelPlanetsController();
-const listOpenContracts = new ListOpenContractsController();
-
+// put
 const acceptContractController = new AccecptContractsController();
 const finishTranportContractController = new FinishTranportContractController();
 const refilFuelController = new RefilFuelController();
+
+// get
+const travelPlanetsController = new TravelPlanetsController();
+const listOpenContracts = new ListOpenContractsController();
+const transactionTableController = new TransactionTableController();
 
 routes.post("/pilot/", createPilotController.handle);
 routes.post("/ship/", createShipController.handle);
@@ -32,4 +37,6 @@ routes.put("/ship/refil", refilFuelController.handle);
 
 routes.get("/travel/", travelPlanetsController.handle);
 routes.get("/listopencontracts/", listOpenContracts.handle);
+routes.get("/table/", transactionTableController.handle);
+
 export { routes };
