@@ -70,8 +70,8 @@ export class TotalWeighByPlanetUseCase {
             }
             return acc;
           }, 0),
-          energy: resourcesSent.reduce((acc, item) => {
-            if (item.name === "energy") {
+          minerals: resourcesSent.reduce((acc, item) => {
+            if (item.name === "minerals") {
               return acc + item.weight;
             }
             return acc;
@@ -90,8 +90,8 @@ export class TotalWeighByPlanetUseCase {
             }
             return acc;
           }, 0),
-          energy: resourcesRecived.reduce((acc, item) => {
-            if (item.name === "energy") {
+          minerals: resourcesRecived.reduce((acc, item) => {
+            if (item.name === "minerals") {
               return acc + item.weight;
             }
             return acc;
