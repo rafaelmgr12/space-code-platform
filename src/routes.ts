@@ -8,6 +8,7 @@ import { TravelPlanetsController } from "./modules/pilot/travel/useCase/TravelPl
 import { CreatePilotController } from "./modules/pilot/useCase/createPilot/CreatePilotController";
 import { CreateShipController } from "./modules/ship/useCase/createShip/CreateShipController";
 import { RefilFuelController } from "./modules/ship/useCase/refilFuel/RefilFuelController";
+import { TotalWeighByPlanetController } from "./modules/summary/useCase/totalWeighByPlanet/TotalWeighByPlanetController";
 import { TransactionTableController } from "./modules/summary/useCase/transactionTable/TransactionTableController";
 
 const routes = Router();
@@ -26,6 +27,7 @@ const refilFuelController = new RefilFuelController();
 const travelPlanetsController = new TravelPlanetsController();
 const listOpenContracts = new ListOpenContractsController();
 const transactionTableController = new TransactionTableController();
+const totalWeighByPlanetController = new TotalWeighByPlanetController();
 
 routes.post("/pilot/", createPilotController.handle);
 routes.post("/ship/", createShipController.handle);
@@ -37,6 +39,7 @@ routes.put("/ship/refil", refilFuelController.handle);
 
 routes.get("/travel/", travelPlanetsController.handle);
 routes.get("/listopencontracts/", listOpenContracts.handle);
-routes.get("/table/", transactionTableController.handle);
+routes.get("/summary/table/", transactionTableController.handle);
+routes.get("/summary/weightplanet", totalWeighByPlanetController.handle);
 
 export { routes };
