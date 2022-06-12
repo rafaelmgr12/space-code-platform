@@ -4,8 +4,6 @@ interface IPlanet {
   planet_name: string;
 }
 
-type summaries = number | string | boolean | null | undefined;
-
 export class TotalWeighByPlanetUseCase {
   async execute({ planet_name }: IPlanet) {
     const planetSent = await prisma.contracts.findMany({
