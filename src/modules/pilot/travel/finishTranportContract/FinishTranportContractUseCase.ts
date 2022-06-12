@@ -1,4 +1,5 @@
 import { prisma } from "../../../../database/prismaClient";
+import { AppError } from "../../../../errors/AppError";
 
 interface IFinishTransport {
   id: string;
@@ -13,7 +14,7 @@ export class FinishTranportContractUseCase {
       },
     });
     if (!pilot) {
-      throw new Error("pilot not found");
+      throw new AppError("pilot not found");
     }
 
     const ship = await prisma.ship.findUnique({
@@ -22,7 +23,7 @@ export class FinishTranportContractUseCase {
       },
     });
     if (!ship) {
-      throw new Error("ship not found");
+      throw new AppError("ship not found");
     }
 
     const checkPilotAssing = await prisma.contracts.findFirst({
@@ -31,7 +32,7 @@ export class FinishTranportContractUseCase {
       },
     });
     if (!checkPilotAssing) {
-      throw new Error("pilot not assing");
+      throw new AppError("pilot not assing");
     }
 
     const contract = await prisma.contracts.update({
@@ -50,7 +51,7 @@ export class FinishTranportContractUseCase {
       },
     });
     if (!route) {
-      throw new Error("route not found");
+      throw new AppError("route not found");
     }
     const fuelBalance = ship.fuel_level - route.fuel_consumption;
 
