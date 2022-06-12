@@ -51,6 +51,20 @@ export class AccecptContractsUseCase {
       throw new AppError("The fuel is not enough to travel");
     }
 
+    const resource = await prisma.resource.findMany({
+      where: {
+        contracts_id: contracExist.id,
+      },
+    });
+    let weightResource = 0;
+    // eslint-disable-next-line no-plusplus
+    for (let i = 0, len = resource.length; i < len; i++) {
+      weightResource += resource[i].weight;
+    }
+    if (ship.weight_capacity < weightResource) {
+      throw new AppError("The cargo is not enough to travel");
+    }
+
     const acceptedContract = await prisma.contracts.findUnique({
       where: {
         id,
