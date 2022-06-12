@@ -30,17 +30,7 @@ export class CreateShipUseCase {
       },
     });
     if (checkShipAlreadyExist) {
-      const ship = await prisma.ship.update({
-        where: {
-          pilot_id: pilot_id.id,
-        },
-        data: {
-          fuel_capacity,
-          fuel_level,
-          weight_capacity,
-        },
-      });
-      return ship;
+      throw new AppError("ship already exist");
     }
 
     const ship = await prisma.ship.create({
