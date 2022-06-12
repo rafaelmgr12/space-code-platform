@@ -7,7 +7,7 @@ let createPilotUseCase: CreatePilotUseCase;
 
 let createShipUsecase: CreateShipUseCase;
 
-describe("Pilot Use Cases", () => {
+describe("Ship Use Cases", () => {
   beforeEach(() => {
     createPilotUseCase = new CreatePilotUseCase();
 
