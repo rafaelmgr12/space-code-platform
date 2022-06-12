@@ -1,24 +1,12 @@
 import { prisma } from "../src/database/prismaClient";
 import { AppError } from "../src/errors/AppError";
-import { AccecptContractsUseCase } from "../src/modules/contracts/acceptContracts/AcceptContractsUseCase";
 import { PublishContractUseCase } from "../src/modules/contracts/useCase/publishContract/PublishContractUseCase";
-import { FinishTranportContractUseCase } from "../src/modules/pilot/travel/finishTranportContract/FinishTranportContractUseCase";
-import { CreatePilotUseCase } from "../src/modules/pilot/useCase/createPilot/CreatePilotUseCase";
-import { CreateShipUseCase } from "../src/modules/ship/useCase/createShip/CreateShipUseCase";
 
-let createPilotUseCase: CreatePilotUseCase;
-let finishTranportContractUseCase: FinishTranportContractUseCase;
 let publishContractUseCase: PublishContractUseCase;
-let acceptedContractUseCase: AccecptContractsUseCase;
-let createShipUsecase: CreateShipUseCase;
 
 describe("Contracts Use Case", () => {
   beforeEach(() => {
-    createPilotUseCase = new CreatePilotUseCase();
-    finishTranportContractUseCase = new FinishTranportContractUseCase();
     publishContractUseCase = new PublishContractUseCase();
-    acceptedContractUseCase = new AccecptContractsUseCase();
-    createShipUsecase = new CreateShipUseCase();
   });
   it("Should be able to  publish a contract", async () => {
     const contract = await publishContractUseCase.execute({
