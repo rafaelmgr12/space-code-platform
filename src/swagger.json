@@ -1,0 +1,286 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Space Code Platform Documentation",
+        "description": "This is an API For the Galactic Empire",
+        "version": "1.0.0",
+        "contact": {
+            "email": "ribeirorafaelmatheus@gmail.com"
+        }
+    },
+    "paths": {
+        "/pilot": {
+            "post": {
+                "tags": [
+                    "Pilot"
+                ],
+                "summary": "Create a new pilot",
+                "description": "Create a new pilot",
+                "operationId": "createPilot",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "pilot_certification": {
+                                        "type": "string",
+                                        "description": "Pilot certification",
+                                        "example": "Pilot"
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Rafael Matheus"
+                                    },
+                                    "age": {
+                                        "type": "integer",
+                                        "example": 30
+                                    },
+                                    "credit": {
+                                        "type": "float",
+                                        "example": 100
+                                    },
+                                    "location_planet": {
+                                        "type": "string",
+                                        "example": "Tatooine"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/ship": {
+            "post": {
+                "tags": [
+                    "Ship"
+                ],
+                "summary": "Create a new ship",
+                "description": "Create a new ship",
+                "operationId": "createShip",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "fuel_capacity": {
+                                        "type": "float",
+                                        "example": 100
+                                    },
+                                    "fuel_level": {
+                                        "type": "float",
+                                        "example": 100
+                                    },
+                                    "weight_capacity": {
+                                        "type": "float",
+                                        "example": 100
+                                    },
+                                    "pilot_certification": {
+                                        "type": "string",
+                                        "example": "12345"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/contracts": {
+            "post": {
+                "tags": [
+                    "Contracts"
+                ],
+                "summary": "Create a new contract",
+                "description": "Create a new contract",
+                "operationId": "createContract",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "description": {
+                                        "type": "string",
+                                        "example": "water and food to Calas"
+                                    },
+                                    "payload": {
+                                        "type": "string",
+                                        "example": "water and food to Calas"
+                                    },
+                                    "origin_planet": {
+                                        "type": "string",
+                                        "example": "Tatooine"
+                                    },
+                                    "destination_planet": {
+                                        "type": "string",
+                                        "example": "Calas"
+                                    },
+                                    "value": {
+                                        "type": "float",
+                                        "example": 100
+                                    },
+                                    "weight": {
+                                        "type": "string",
+                                        "example": "10,20"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/contracts/accept": {
+            "put": {
+                "tags": [
+                    "Contracts"
+                ],
+                "summary": "Accept a contract",
+                "description": "Accept a contract",
+                "operationId": "acceptContract",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "string",
+                                        "example": "9cca0bf4-29ec-4623-a3fc-6908c0eb8c24"
+                                    },
+                                    "pilot_certification": {
+                                        "type": "string",
+                                        "example": "1234"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/contracts/close": {
+            "put": {
+                "tags": [
+                    "Contracts"
+                ],
+                "summary": "Close a contract",
+                "description": "Close a contract",
+                "operationId": "closeContract",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "string",
+                                        "example": "9cca0bf4-29ec-4623-a3fc-6908c0eb8c24"
+                                    },
+                                    "pilot_certification": {
+                                        "type": "string",
+                                        "example": "1234"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "ship/refil": {
+            "put": {
+                "tags": [
+                    "Ship"
+                ],
+                "summary": "Refil fuel to a ship",
+                "description": "Refil fuel to a ship",
+                "operationId": "refilShip",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "pilot_certification": {
+                                        "type": "string",
+                                        "example": "1234"
+                                    },
+                                    "quantity": {
+                                        "type": "float",
+                                        "example": 100
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/listopencontracts": {
+            "get": {
+                "tags": [
+                    "Contracts"
+                ],
+                "summary": "List open contracts",
+                "description": "List open contracts",
+                "operationId": "listOpenContracts",
+                "requestBody": {
+                    "content": {
+                        "application/json": {}
+                    }
+                }
+            }
+        },
+        "/summary/table":{
+            "get":{
+                "tags": [
+                    "Summary"
+                ],
+                "summary": "Get summary transaction table",
+                "description": "Get the Intergalactic Federation transactions ledger sorted by date (oldest to newest).",
+                "operationId": "getSummaryTable",
+                "requestBody": {
+                    "content": {
+                        "application/json": {}
+                    }
+                }
+            }
+        },
+        "/summary/weight":{
+            "get":{
+                "tags": [
+                    "Summary"
+                ],
+                "summary": "Get total weight in tons of each resource sent and received by each planet",
+                "description": "Get total weight in tons of each resource sent and received by each planet",
+                "operationId": "getSummaryWeight",
+                "requestBody": {
+                    "content": {
+                        "application/json": {}
+                    }
+                }
+            }
+        },
+        "/summary/percentage":{
+            "get":{
+                "tags": [
+                    "Summary"
+                ],
+                "summary": "Get the percentage of resource type transported by each pilot.",
+                "description": "Get the percentage of resource type transported by each pilot.",
+                "operationId": "getPercentagevalue",
+                "requestBody": {
+                    "content": {
+                        "application/json": {}
+                    }
+                }
+            }
+        }
+        
+
+    }
+}

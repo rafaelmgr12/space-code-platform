@@ -1,0 +1,99 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model Pilot {
+  id String @id @default(uuid())
+
+  pilot_certification String @unique
+  name                String
+  age                 Int
+  credits             Float
+  location_planet     String
+
+  Ship Ship?
+  Contratcs Contracts[]
+  created_at DateTime @default(now())
+
+  @@map("pilots")
+}
+
+model Ship {
+  id String @id @default(uuid())
+
+  fuel_capacity   Float
+  fuel_level      Float
+  weight_capacity Float
+
+  pilot      Pilot?    @relation(fields: [pilot_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  pilot_id   String?
+  created_at DateTime @default(now())
+
+  @@map("ships")
+}
+
+model Contracts {
+  id String @id @default(uuid())
+
+  description        String
+  payload            String
+  origin_planet      String
+  destination_planet String
+  value              Float
+  created_at         DateTime  @default(now())
+  end_at             DateTime?
+
+  pilot_id           String?
+  pilot              Pilot?  @relation(fields: [pilot_id], references: [id])
+  resources Resource[]
+ 
+
+
+
+  @@map("contracts")
+}
+
+model Resource {
+  id String @id @default(uuid())
+
+  name   String
+  weight Float
+
+  contracts_id String
+  Contracts    Contracts @relation(fields: [contracts_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+
+
+  created_at DateTime @default(now())
+
+  @@map("resources")
+}
+
+model Travel{
+  id Int @id @default(autoincrement())
+
+  origin_planet String
+  destination_planet String
+ 
+  fuel_consumption Float
+
+  route Boolean
+
+  @@map("travels")
+}
+
+model Trasaction{
+  id String @id @default(uuid())
+
+  description String
+  created_at DateTime @default(now())
+
+  @@map("transactions")
+}
