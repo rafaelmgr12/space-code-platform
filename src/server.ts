@@ -2,12 +2,21 @@ import express, { NextFunction, Request, Response } from "express";
 import "reflect-metadata";
 import "express-async-errors";
 
+import swaggerUI from "swagger-ui-express";
+
 import { AppError } from "./errors/AppError";
 import { routes } from "./routes";
+import swaggerFile from "./swagger.json";
 
 const app = express();
 
 app.use(express.json());
+app.use(
+  "/api-docs",
+  swaggerUI.serve,
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
+  swaggerUI.setup(swaggerFile)
+);
 
 app.use(routes);
 

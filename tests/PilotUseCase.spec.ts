@@ -73,7 +73,7 @@ describe("Pilot Use Cases", () => {
   it("Sould be able to refil ship ", async () => {
     const pilot = await createPilotUseCase.execute({
       pilot_certification: "4323123",
-      name: "Matheus",
+      name: "Pilot Test",
       age: 19,
       credits: 1421412,
       location_planet: "Calas",
@@ -92,6 +92,19 @@ describe("Pilot Use Cases", () => {
     await prisma.pilot.delete({
       where: {
         id: pilot.id,
+      },
+    });
+
+    const result = await prisma.trasaction.findFirst({
+      where: {
+        description: {
+          contains: `${pilot.name} bought fuel: +₭${7 * 50}`,
+        },
+      },
+    });
+    await prisma.trasaction.delete({
+      where: {
+        id: result?.id,
       },
     });
   });
@@ -185,6 +198,18 @@ it("Should be able to finish a tranport contract", async () => {
   await prisma.pilot.delete({
     where: {
       id: pilot.id,
+    },
+  });
+  const result = await prisma.trasaction.findFirst({
+    where: {
+      description: {
+        contains: `Contract ${contract.id} ${contract.description} paid: -₭${contract.value}`,
+      },
+    },
+  });
+  await prisma.trasaction.delete({
+    where: {
+      id: result?.id,
     },
   });
 });
