@@ -1,7 +1,10 @@
 <h1 align="center">Space Code Plataform</h1>
+<p align = "center"> An application to manage the transport fleet of goods through the galaxy, including four planets.</p>
+
 
 <p align="center">
   <a href="#-technology">Technology</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+    <a href="#-project">Project</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#-how-execute">How to Run</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#-license">License</a>
 </p>
@@ -18,6 +21,11 @@ The Project was develop as using the following techs:
 - [Prisma](https://www.prisma.io/)
 - [Jest](https://jestjs.io/)
 
+
+## 💻 Project
+The project is a challenge proposed by Codeminer42, in which we construct an API for an Intergalactic Empire. The purpose of the Empire is to manage delivery made by the pilots that are registered in the system with the respective ships. To make the deliveries, the Empire opened transportation contracts where the pilot can accept it and make the delivery.
+
+Also, there are rules to make the deliveries for example the routes. Some routes are not possible to make, and it is also possible for a pilot to refill the rule of the ship. And last, it is also possible to generate the transaction history and summary of the transportation statistics.
 
 ## 🚀 How to Run
 
